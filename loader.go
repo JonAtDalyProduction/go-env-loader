@@ -43,7 +43,7 @@ func createEnvMap(f string) map[string]string {
 	em := make(map[string]string)
 	file, err := os.Open(f)
 	if err != nil {
-		log.Fatal(file, " file not found")
+		log.Fatal(f, " file not found")
 	}
 	defer file.Close()
 	s := bufio.NewScanner(file)

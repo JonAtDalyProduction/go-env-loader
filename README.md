@@ -1,4 +1,8 @@
 # go-env-loader
+### run the demo
+```shell
+ go run examples/main.go --env=examples/sample.env
+```
 ## load a .env file into a config struct with tags
 ```go
 package main
@@ -16,7 +20,7 @@ type SampleConfig struct {
 }
 
 func main() {
-	config := SampleConfig{}
+	var config SampleConfig
 	var envFile string
 	flag.StringVar(&envFile, "env", ".env", "sets the .env filename")
 	flag.Parse()

@@ -17,7 +17,7 @@ func main() {
 	var envFile string
 	flag.StringVar(&envFile, "env", ".env", "sets the .env filename")
 	flag.Parse()
-	envloader.ParseEnv(config, envFile)
+	envloader.ParseEnv(&config, envFile)
 	bs, _ := json.MarshalIndent(config, "", "    ")
 	fmt.Printf("CONFIG SET:\n%+v\n", string(bs))
 }
