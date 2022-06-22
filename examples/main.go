@@ -1,6 +1,3 @@
-# go-env-loader
-## load a .env file into a config struct with tags
-```go
 package main
 
 import (
@@ -24,6 +21,3 @@ func main() {
 	bs, _ := json.MarshalIndent(config, "", "    ")
 	fmt.Printf("CONFIG SET:\n%+v\n", string(bs))
 }
-
-
-```

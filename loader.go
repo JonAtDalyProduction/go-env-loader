@@ -1,4 +1,4 @@
-package go_env_loader
+package envloader
 
 import (
 	"bufio"
