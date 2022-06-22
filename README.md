@@ -1,5 +1,9 @@
 # go-env-loader
 
+### download the package
+```shell
+go get github.com/JonAtDalyProduction/go-env-loader
+```
 ### run the demo
 
 ```shell
