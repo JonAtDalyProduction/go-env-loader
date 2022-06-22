@@ -1,9 +1,13 @@
 # go-env-loader
+
 ### run the demo
+
 ```shell
  go run examples/main.go --env=examples/sample.env
 ```
+
 ## load a .env file into a config struct with tags
+
 ```go
 package main
 
@@ -11,7 +15,7 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	envloader "github.com/jonatdalyproduction/go-env-loader"
+	envloader "github.com/JonAtDalyProduction/go-env-loader"
 )
 
 type SampleConfig struct {

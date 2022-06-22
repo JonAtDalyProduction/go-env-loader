@@ -4,7 +4,8 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	envloader "github.com/jonatdalyproduction/go-env-loader"
+
+	envloader "github.com/JonAtDalyProduction/go-env-loader"
 )
 
 type SampleConfig struct {

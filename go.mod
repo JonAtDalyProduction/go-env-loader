@@ -1,3 +1,3 @@
-module github.com/jonatdalyproduction/go-env-loader
+module github.com/JonAtDalyProduction/go-env-loader
 
 go 1.18
