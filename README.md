@@ -38,7 +38,7 @@ func main() {
 	var envFile string
 	flag.StringVar(&envFile, "env", ".env", "sets the .env filename")
 	flag.Parse()
-	# pass a pointer to your config struct
+	// pass a pointer to your config struct
 	envloader.ParseEnv(&config, envFile)
 	bs, _ := json.MarshalIndent(config, "", "    ")
 	fmt.Printf("CONFIG SET:\n%+v\n", string(bs))
