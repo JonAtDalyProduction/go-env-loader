@@ -17,8 +17,11 @@ const (
 func ParseEnv(e interface{}, filename string) {
 	envMap := createEnvMap(filename)
 	envVal := reflect.ValueOf(e)
-	if envVal.Kind() != reflect.Pointer || envVal.IsNil() {
-		log.Fatal("env struct is not a pointer or has nil value")
+	if envVal.Kind() != reflect.Pointer {
+		log.Fatal("error you must pass a pointer to the env struct")
+	}
+	if envVal.IsNil() {
+		log.Fatal("error env struct was empty")
 	}
 	envEl := envVal.Elem()
 	envType := reflect.TypeOf(e).Elem()
@@ -50,10 +53,37 @@ func createEnvMap(f string) map[string]string {
 	s.Split(bufio.ScanLines)
 	for s.Scan() {
 		line := s.Text()
-		if string(line[0]) != "#" {
-			e := strings.Split(line, "=")
-			em[e[0]] = e[1]
+		comment := strings.ContainsAny(line, "#")
+		if !comment {
+			xs := splitKeyValue(line)
+			em[xs[0]] = xs[1]
+		}
+		if comment {
+			skipLine := strings.HasPrefix(line, "#")
+			if !skipLine {
+				xs, err := splitKeyValueComment(line)
+				if err == nil {
+					em[xs[0]] = xs[1]
+				}
+			}
 		}
 	}
 	return em
+}
+
+//splitKeyValue splits an env file line into a slice of strings
+func splitKeyValue(line string) []string {
+	return strings.SplitN(line, "=", 2)
+}
+
+//splitKeyValueComment takes an env file line and removes any inline comment and passes it to splitKeyValue
+func splitKeyValueComment(line string) ([]string, error) {
+	before, _, found := strings.Cut(line, "#")
+	if !found {
+		err := fmt.Errorf("error ")
+		fmt.Println(err)
+		return []string{}, err
+	}
+	trim := strings.Trim(before, " ")
+	return splitKeyValue(trim), nil
 }
