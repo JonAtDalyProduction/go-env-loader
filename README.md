@@ -11,7 +11,12 @@ go get github.com/JonAtDalyProduction/go-env-loader
 ```
 
 ## load a .env file into a config struct with tags
-
+```env
+NOT_REQUIRED=not_required_but_we_set_it_anyway
+REQUIRED_VARIABLE=required_env_variable
+INLINE_COMMENT=inline_comment # ths is a comment
+# normal comment
+```
 ```go
 package main
 
@@ -25,6 +30,7 @@ import (
 type SampleConfig struct {
 	SampleVariable string `env:"SAMPLE_VARIABLE,required=true"`
 	NotRequired    string `env:"NOT_REQUIRED,required=false"`
+	InlineComment  string `env:"INLINE_COMMENT,required=true"`
 }
 
 func main() {
@@ -32,10 +38,9 @@ func main() {
 	var envFile string
 	flag.StringVar(&envFile, "env", ".env", "sets the .env filename")
 	flag.Parse()
-	envloader.ParseEnv(config, envFile)
+	# pass a pointer to your config struct
+	envloader.ParseEnv(&config, envFile)
 	bs, _ := json.MarshalIndent(config, "", "    ")
 	fmt.Printf("CONFIG SET:\n%+v\n", string(bs))
 }
-
-
 ```
